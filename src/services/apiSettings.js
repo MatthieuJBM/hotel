@@ -11,6 +11,8 @@ export async function getSettings() {
 }
 
 // We expect a newSetting object that looks like {setting: newValue}
+// We don't need to pass the id, because we will update just
+// the row number one
 export async function updateSetting(newSetting) {
   const { data, error } = await supabase
     .from("settings")
