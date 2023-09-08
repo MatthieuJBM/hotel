@@ -45,6 +45,7 @@ export async function createEditCabin(newCabin, id) {
   }
 
   // 2. Upload image
+  if (hasImagePath) return data;
   //  We need to specify the image path, that we want to create.
 
   //const avatarFile = event.target.files[0];

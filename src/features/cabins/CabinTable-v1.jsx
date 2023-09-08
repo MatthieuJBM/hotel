@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import { getCabins } from "../../services/apiCabins";
 import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
-import { useCabins } from "./useCabins";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -28,7 +29,21 @@ const TableHeader = styled.header`
 `;
 
 function CabinTable() {
-  const { isLoading, cabins } = useCabins();
+  const {
+    isLoading,
+    data: cabins,
+    error,
+  } = useQuery({
+    /* queryKey is what identifies each data.
+       If later we would use query again on another page with this exact key
+       then the data would be read from the cache. 
+    */
+    queryKey: ["cabins"],
+    /* The actual query function. This function is responsible for fetching
+       the data from the API. This function must return a promise. 
+    */
+    queryFn: getCabins,
+  });
 
   if (isLoading) return <Spinner />;
 
